@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,10 +10,10 @@
     <meta name="apple-mobile-web-app-title" content="CapacitiumX POS">
     <meta name="theme-color" content="#0f172a">
 
-    <title>CapacitiumX POS | Punto de Venta</title>
+    <title>CapacitiumX POS</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%2338bdf8'/><path d='M120 160 h272 v240 h-272 z' fill='%230f172a'/><rect x='160' y='200' width='192' height='40' fill='%2338bdf8' rx='5'/><circle cx='256' cy='320' r='30' fill='white'/></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%2338bdf8'/><path d='M120 160 h272 v240 h-272 z' fill='%230f172a'/><rect x='160' y='200' width='192' height='40' fill='%2338bdf8' rx='5'/><circle cx='256' cy='320' r='30' fill='white'/></svg>">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1162/1162456.png">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1162/1162456.png">
 
     <script>
         const myManifest = {
@@ -23,12 +23,14 @@
             "display": "standalone",
             "background_color": "#1e293b",
             "theme_color": "#38bdf8",
-            "icons": [{
-                "src": "https://cdn-icons-png.flaticon.com/512/3050/3050186.png",
-                "sizes": "512x512",
-                "type": "image/png",
-                "purpose": "any maskable"
-            }]
+            "icons": [
+                {
+                    "src": "https://cdn-icons-png.flaticon.com/512/1162/1162456.png",
+                    "sizes": "512x512",
+                    "type": "image/png",
+                    "purpose": "any maskable"
+                }
+            ]
         };
         const blob = new Blob([JSON.stringify(myManifest)], {type: 'application/json'});
         const manifestURL = URL.createObjectURL(blob);
@@ -56,7 +58,7 @@
 
         /* CAJA REGISTRADORA */
         .register-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; height: 100%; }
-        .product-list { background: #334155; border-radius: 10px; padding: 10px; overflow-y: auto; height: 65vh; }
+        .product-list { background: #334155; border-radius: 10px; padding: 10px; overflow-y: auto; height: 60vh; }
         .totals-panel { background: #0f172a; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #38bdf8; }
 
         #codeInput { width: 100%; padding: 15px; font-size: 20px; background: #1e293b; border: 2px solid #38bdf8; color: white; border-radius: 8px; outline: none; margin-bottom: 15px; box-sizing: border-box; }
@@ -70,19 +72,15 @@
         .pay-btn { width: 100%; padding: 20px; font-size: 22px; background: #22c55e; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 0 #166534; }
         .pay-btn:active { transform: translateY(4px); box-shadow: none; }
 
-        /* INVENTARIO */
-        .inventory-form { background: #334155; padding: 20px; border-radius: 12px; margin-bottom: 25px; }
-        .inventory-form input { padding: 12px; background: #1e293b; border: 1px solid #475569; color: white; border-radius: 6px; }
-
         /* Modal Cobro */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
-        .modal-content { background: #1e293b; padding: 40px; border-radius: 20px; width: 450px; text-align: center; border: 2px solid #38bdf8; }
+        .modal-content { background: #1e293b; padding: 40px; border-radius: 20px; width: 90%; max-width: 450px; text-align: center; border: 2px solid #38bdf8; }
         .change-display { font-size: 36px; color: #facc15; margin: 25px 0; font-weight: bold; }
 
         /* Mobile Adjustment */
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            .sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; }
+            .sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; border-right: none; border-bottom: 1px solid #334155; }
             .sidebar h2 { display: none; }
             .register-grid { grid-template-columns: 1fr; }
             .product-list { height: 40vh; }
@@ -92,7 +90,7 @@
 <body>
 
     <div class="sidebar">
-        <h2>CapacitiumX</h2>
+        <h2>CAPACITIUMX</h2>
         <button class="menu-btn active" id="btn-pos" onclick="showScreen('pos', this)">🛒 Venta</button>
         <button class="menu-btn" id="btn-inv" onclick="showScreen('inventory', this)">📦 Inventario</button>
         <button class="menu-btn" id="btn-rep" onclick="showScreen('reports', this)">📊 Reporte</button>
@@ -102,7 +100,7 @@
         <div id="pos" class="screen active">
             <div class="register-grid">
                 <div>
-                    <input type="text" id="codeInput" placeholder="🔍 Escanea Código de Barras..." autocomplete="off">
+                    <input type="text" id="codeInput" placeholder="🔍 Escanea o escribe código..." autocomplete="off">
                     <div class="product-list">
                         <table id="ticketTable">
                             <thead>
@@ -126,17 +124,17 @@
 
         <div id="inventory" class="screen">
             <h1>📦 Catálogo de Productos</h1>
-            <div class="inventory-form">
+            <div style="background: #334155; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
                 <h3>Añadir al Sistema</h3>
                 <div style="display:flex; gap:10px; flex-wrap: wrap;">
-                    <input type="text" id="newCode" placeholder="Código">
-                    <input type="text" id="newName" placeholder="Nombre Articulo" style="flex:1">
-                    <input type="number" id="newPrice" placeholder="Precio $" style="width:120px">
-                    <button class="menu-btn" style="background:#38bdf8; color:#000" onclick="addProduct()">Guardar</button>
+                    <input type="text" id="newCode" placeholder="Código" style="padding: 10px; border-radius: 5px; border:none;">
+                    <input type="text" id="newName" placeholder="Nombre Articulo" style="flex:1; padding: 10px; border-radius: 5px; border:none;">
+                    <input type="number" id="newPrice" placeholder="Precio $" style="width:120px; padding: 10px; border-radius: 5px; border:none;">
+                    <button class="menu-btn" style="background:#38bdf8; color:#000; padding: 10px 20px;" onclick="addProduct()">Guardar</button>
                 </div>
             </div>
             <table style="background:#0f172a; border-radius:12px;">
-                <thead><tr><th>Código</th><th>Descripción</th><th>Precio</th><th></th></tr></thead>
+                <thead><tr><th>Código</th><th>Descripción</th><th>Precio</th><th>Acción</th></tr></thead>
                 <tbody id="inventoryList"></tbody>
             </table>
         </div>
@@ -147,10 +145,6 @@
                 <div style="background:#0f172a; padding:30px; border-radius:15px; flex:1; text-align:center; border: 1px solid #22c55e;">
                     <h3 style="color:#22c55e">VENTAS TOTALES</h3>
                     <div class="big-total" id="dailyTotal" style="text-align:center;">$0.00</div>
-                </div>
-                <div style="background:#0f172a; padding:30px; border-radius:15px; flex:1; text-align:center; border: 1px solid #38bdf8;">
-                    <h3 style="color:#38bdf8">TICKETS</h3>
-                    <div class="big-total" id="ticketsCount" style="text-align:center;">0</div>
                 </div>
             </div>
             <button onclick="clearSales()" style="margin-top:40px; background:#ef4444; color:white; border:none; padding:15px 30px; border-radius:8px; cursor:pointer; font-weight:bold;">🧹 REINICIAR CORTE</button>
@@ -170,14 +164,14 @@
             <div class="change-display" id="changeDisplay">Cambio: $0.00</div>
             
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:20px;">
-                <button class="pay-btn" style="font-size:16px" onclick="finalizeSale()">LISTO</button>
-                <button class="pay-btn" style="background:#475569; font-size:16px; box-shadow:0 4px 0 #1e293b" onclick="closePayModal()">VOLVER</button>
+                <button class="pay-btn" style="font-size:16px; padding:15px;" onclick="finalizeSale()">CONFIRMAR</button>
+                <button class="pay-btn" style="background:#475569; font-size:16px; padding:15px;" onclick="closePayModal()">VOLVER</button>
             </div>
         </div>
     </div>
 
     <script>
-        // SERVICE WORKER PARA INSTALACIÓN COMO APP REAL
+        // SERVICE WORKER PARA INSTALACIÓN
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 const swCode = `
@@ -190,107 +184,9 @@
             });
         }
 
-        let products = JSON.parse(localStorage.getItem('pos_prod_v2')) || [];
-        let sales = JSON.parse(localStorage.getItem('pos_sale_v2')) || [];
+        let products = JSON.parse(localStorage.getItem('pos_prod_v3')) || [];
+        let sales = JSON.parse(localStorage.getItem('pos_sale_v3')) || [];
         let currentCart = [];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderInventory();
-            updateReports();
-            document.getElementById('codeInput').focus();
-        });
-
-        document.getElementById('codeInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                addToCart(this.value);
-                this.value = '';
-            }
-        });
-
-        // ATAJO TECLADO F2 PARA COBRAR
-        window.addEventListener('keydown', (e) => { if(e.key === 'F2') openPayModal(); });
-
-        function addToCart(code) {
-            const product = products.find(p => p.code === code);
-            if (product) {
-                const existing = currentCart.find(item => item.code === code);
-                if (existing) existing.qty++;
-                else currentCart.push({ ...product, qty: 1 });
-                renderCart();
-            } else {
-                alert("❌ Producto no registrado.");
-            }
-        }
-
-        function renderCart() {
-            const tbody = document.getElementById('ticketBody');
-            tbody.innerHTML = '';
-            let total = 0, count = 0;
-            currentCart.forEach((item, index) => {
-                const sub = item.price * item.qty;
-                total += sub; count += item.qty;
-                tbody.innerHTML += `<tr><td>${item.qty}</td><td>${item.name}</td><td class="price-col">$${sub.toFixed(2)}</td><td><button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer;">✕</button></td></tr>`;
-            });
-            document.getElementById('displayTotal').innerText = `$${total.toFixed(2)}`;
-            document.getElementById('itemCount').innerText = `${count} Artículos`;
-        }
-
-        function removeFromCart(i) { currentCart.splice(i, 1); renderCart(); }
-
-        function openPayModal() {
-            if (currentCart.length === 0) return;
-            const total = currentCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            document.getElementById('modalTotal').innerText = `$${total.toFixed(2)}`;
-            document.getElementById('payModal').style.display = 'flex';
-            setTimeout(() => document.getElementById('cashReceived').focus(), 100);
-        }
-
-        function closePayModal() { document.getElementById('payModal').style.display = 'none'; }
-
-        function calcChange() {
-            const total = currentCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            const received = parseFloat(document.getElementById('cashReceived').value) || 0;
-            const change = received - total;
-            const display = document.getElementById('changeDisplay');
-            display.innerText = change >= 0 ? `Cambio: $${change.toFixed(2)}` : `Faltan: $${Math.abs(change).toFixed(2)}`;
-            display.style.color = change >= 0 ? '#4ade80' : '#ef4444';
-        }
-
-        function finalizeSale() {
-            const total = currentCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            if ((parseFloat(document.getElementById('cashReceived').value) || 0) < total) return alert("Dinero insuficiente");
-            sales.push({ date: new Date(), total: total });
-            localStorage.setItem('pos_sale_v2', JSON.stringify(sales));
-            currentCart = []; renderCart(); updateReports(); closePayModal();
-            alert("✅ Venta Exitosa");
-        }
-
-        function addProduct() {
-            const code = document.getElementById('newCode').value, name = document.getElementById('newName').value, price = parseFloat(document.getElementById('newPrice').value);
-            if (!code || !name || !price) return alert("Completa los datos");
-            products.push({ code, name, price });
-            localStorage.setItem('pos_prod_v2', JSON.stringify(products));
-            document.getElementById('newCode').value = ''; document.getElementById('newName').value = ''; document.getElementById('newPrice').value = '';
-            renderInventory();
-        }
-
-        function renderInventory() {
-            const tbody = document.getElementById('inventoryList');
-            tbody.innerHTML = '';
-            products.forEach((p, i) => {
-                tbody.innerHTML += `<tr><td>${p.code}</td><td>${p.name}</td><td>$${p.price}</td><td><button onclick="delProd(${i})" style="color:red; background:none; border:none; cursor:pointer;">Borrar</button></td></tr>`;
-            });
-        }
-
-        function delProd(i) { products.splice(i, 1); localStorage.setItem('pos_prod_v2', JSON.stringify(products)); renderInventory(); }
-
-        function updateReports() {
-            let total = sales.reduce((acc, s) => acc + s.total, 0);
-            document.getElementById('dailyTotal').innerText = `$${total.toFixed(2)}`;
-            document.getElementById('ticketsCount').innerText = sales.length;
-        }
-
-        function clearSales() { if(confirm("¿Borrar historial?")) { sales = []; localStorage.setItem('pos_sale_v2', JSON.stringify(sales)); updateReports(); } }
 
         function showScreen(id, btn) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -298,6 +194,80 @@
             document.getElementById(id).classList.add('active');
             btn.classList.add('active');
         }
+
+        document.getElementById('codeInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const product = products.find(p => p.code === this.value);
+                if (product) {
+                    const existing = currentCart.find(item => item.code === product.code);
+                    if (existing) existing.qty++;
+                    else currentCart.push({ ...product, qty: 1 });
+                    renderCart();
+                }
+                this.value = '';
+            }
+        });
+
+        function renderCart() {
+            const tbody = document.getElementById('ticketBody');
+            tbody.innerHTML = '';
+            let total = 0, count = 0;
+            currentCart.forEach((item, i) => {
+                total += item.price * item.qty;
+                count += item.qty;
+                tbody.innerHTML += `<tr><td>${item.qty}</td><td>${item.name}</td><td>$${(item.price * item.qty).toFixed(2)}</td><td><button onclick="currentCart.splice(${i},1);renderCart()" style="color:red;background:none;border:none;">✕</button></td></tr>`;
+            });
+            document.getElementById('displayTotal').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('itemCount').innerText = `${count} Artículos`;
+        }
+
+        function openPayModal() {
+            const total = currentCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            if (total === 0) return;
+            document.getElementById('modalTotal').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('payModal').style.display = 'flex';
+        }
+
+        function calcChange() {
+            const total = currentCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            const received = parseFloat(document.getElementById('cashReceived').value) || 0;
+            const change = received - total;
+            document.getElementById('changeDisplay').innerText = `Cambio: $${change.toFixed(2)}`;
+        }
+
+        function finalizeSale() {
+            const total = currentCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            sales.push({ date: new Date(), total: total });
+            localStorage.setItem('pos_sale_v3', JSON.stringify(sales));
+            currentCart = []; renderCart(); document.getElementById('payModal').style.display = 'none';
+            alert("Venta completada"); updateReports();
+        }
+
+        function addProduct() {
+            const c = document.getElementById('newCode').value, n = document.getElementById('newName').value, p = document.getElementById('newPrice').value;
+            if(!c || !n || !p) return;
+            products.push({code: c, name: n, price: parseFloat(p)});
+            localStorage.setItem('pos_prod_v3', JSON.stringify(products));
+            renderInventory();
+        }
+
+        function renderInventory() {
+            const tbody = document.getElementById('inventoryList');
+            tbody.innerHTML = '';
+            products.forEach((p, i) => {
+                tbody.innerHTML += `<tr><td>${p.code}</td><td>${p.name}</td><td>$${p.price}</td><td><button onclick="products.splice(${i},1);localStorage.setItem('pos_prod_v3', JSON.stringify(products));renderInventory()" style="color:red;background:none;border:none;">Borrar</button></td></tr>`;
+            });
+        }
+
+        function updateReports() {
+            let total = sales.reduce((acc, s) => acc + s.total, 0);
+            document.getElementById('dailyTotal').innerText = `$${total.toFixed(2)}`;
+        }
+
+        function clearSales() { sales = []; localStorage.setItem('pos_sale_v3', '[]'); updateReports(); }
+
+        renderInventory();
+        updateReports();
     </script>
 </body>
 </html>
